@@ -9,14 +9,15 @@ public class LocationGraph {
 
     // I chose to use a Map as the underlying data structure for my adjacency list
     // Probably should use generics here, but I didn't want to include extra handling since it's not in the scope of the assignment.
-    private final Map<String, List<Edge>> adjacencyList = new HashMap<>();
+    private final Map<Node, List<Edge>> adjacencyList = new HashMap<>();
 
     /** Adds a location to the adjacency list. Note that this strictly adds the label of the location and **NOT** its associated connections.
      * @param location String representation of the name of the location
      */
     public void addLocation(String location) {
         // Uses a blank arraylist as the edge list since there aren't any edges defined yet
-        adjacencyList.put(location, new ArrayList<>());
+        Node name = new Node(location);
+        adjacencyList.put(name, new ArrayList<>());
     }
 
 
@@ -25,11 +26,20 @@ public class LocationGraph {
      */
     private static class Edge {
         private String to;
+        private String from;
         private double length;
 
+        // Default Constructor for an Edge object
+        Edge() {
+            this.to = "";
+            this.from = "";
+            this.length = 0.0;
+        }
+
         // Constructor for an Edge object
-        Edge(String from, String to, double length) {
+        Edge(String to, String from, double length) {
             this.to = to;
+            this.from = from;
             this.length = length;
         }
     }
@@ -40,7 +50,18 @@ public class LocationGraph {
     private static class Node {
         private String name;
 
-        Node(String name, double distance) {
+
+        /**
+         * Default Constructor a Node object
+         */
+        Node() {
+            this.name = "";
+        }
+
+        /** One-parameter Constructor for a Node object
+         * @param name
+         */
+        Node(String name) {
             this.name = name;
         }
     }
