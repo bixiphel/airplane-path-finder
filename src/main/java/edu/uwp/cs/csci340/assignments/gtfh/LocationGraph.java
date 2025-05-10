@@ -37,6 +37,23 @@ public class LocationGraph {
         adjacencyList.get(from).add(new Edge(to, from, distance));
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+        for (String location : adjacencyList.keySet()) {
+            result += location + " -> ";
+            List<Edge> edges = adjacencyList.get(location);
+            for (Edge edge : edges) {
+                result += edge.to + " (" + edge.length + " miles), ";
+            }
+            if (!edges.isEmpty()) {
+                result = result.substring(0, result.length() - 2); // remove trailing comma and space
+            }
+            result += "\n";
+        }
+        return result;
+    }
+
 
     /**
      * Inner class for an Edge object. It contains a destination and the length to it
