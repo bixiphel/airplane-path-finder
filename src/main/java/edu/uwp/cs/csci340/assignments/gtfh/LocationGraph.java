@@ -9,15 +9,27 @@ public class LocationGraph {
 
     // I chose to use a Map as the underlying data structure for my adjacency list
     // Probably should use generics here, but I didn't want to include extra handling since it's not in the scope of the assignment.
-    private final Map<Node, List<Edge>> adjacencyList = new HashMap<>();
+    private final Map<String, List<Edge>> adjacencyList = new HashMap<>();
 
     /** Adds a location to the adjacency list. Note that this strictly adds the label of the location and **NOT** its associated connections.
      * @param location String representation of the name of the location
      */
     public void addLocation(String location) {
         // Uses a blank arraylist as the edge list since there aren't any edges defined yet
-        Node name = new Node(location);
-        adjacencyList.put(name, new ArrayList<>());
+        adjacencyList.put(location, new ArrayList<>());
+    }
+
+    public void addPath(String from, String to) {
+        // Puts the locations in the adjacency list (with no defined edges) in case they were not previously defined
+        if(!adjacencyList.containsKey(from)) {
+            adjacencyList.put(from, new ArrayList<>());
+        } else if(!adjacencyList.containsKey(to)) {
+            adjacencyList.put(to, new ArrayList<>());
+        }
+
+        // Adds the edge to the edge list. This must be done for both locations since it's undirected
+        adjacencyList.get(to).add(new Edge(to, from, -1));
+        adjacencyList.get(from).add(new Edge(to, from, -1));
     }
 
 
@@ -29,7 +41,6 @@ public class LocationGraph {
         private String from;
         private double length;
 
-
         /**
          * Default Constructor for an Edge object
          */
@@ -38,7 +49,6 @@ public class LocationGraph {
             this.from = "";
             this.length = 0.0;
         }
-
 
         /** 3-Parameter Constructor for an Edge object
          * @param to A string representation of the location the edge comes from
