@@ -29,14 +29,22 @@ public class LocationGraph {
         private String from;
         private double length;
 
-        // Default Constructor for an Edge object
+
+        /**
+         * Default Constructor for an Edge object
+         */
         Edge() {
             this.to = "";
             this.from = "";
             this.length = 0.0;
         }
 
-        // Constructor for an Edge object
+
+        /** 3-Parameter Constructor for an Edge object
+         * @param to A string representation of the location the edge comes from
+         * @param from A string representation of where the edge is pointing to
+         * @param length A double representation of the distance between the locations
+         */
         Edge(String to, String from, double length) {
             this.to = to;
             this.from = from;
