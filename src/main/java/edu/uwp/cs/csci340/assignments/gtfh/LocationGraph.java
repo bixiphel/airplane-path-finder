@@ -19,6 +19,10 @@ public class LocationGraph {
         adjacencyList.put(location, new ArrayList<>());
     }
 
+    /** Adds an Edge between two specified Nodes, and adds the information to the adjacency list. Note: if a Node isn't present in the adjacency list, this first adds the Node to the list
+     * @param from A string representation of the origin location label
+     * @param to A string representation of the destination location label
+     */
     public void addPath(String from, String to) {
         // Puts the locations in the adjacency list (with no defined edges) in case they were not previously defined
         if(!adjacencyList.containsKey(from)) {
