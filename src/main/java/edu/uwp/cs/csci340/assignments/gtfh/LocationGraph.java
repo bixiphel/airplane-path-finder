@@ -1,5 +1,6 @@
 package edu.uwp.cs.csci340.assignments.gtfh;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,15 @@ public class LocationGraph {
     // I chose to use a Map as the underlying data structure for my adjacency list
     // Probably should use generics here, but I didn't want to include extra handling since it's not in the scope of the assignment.
     private final Map<String, List<Edge>> adjacencyList = new HashMap<>();
+
+    /** Adds a location to the adjacency list. Note that this strictly adds the label of the location and **NOT** its associated connections.
+     * @param location String representation of the name of the location
+     */
+    public void addLocation(String location) {
+        // Uses a blank arraylist as the edge list since there aren't any edges defined yet
+        adjacencyList.put(location, new ArrayList<>());
+    }
+
 
     /**
      * Inner class for an Edge object. It contains a destination and the length to it
